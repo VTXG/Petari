@@ -17,4 +17,9 @@ public:
     virtual u32* getRhythmHandle() = 0;
     virtual bool isSoundAttached() const = 0;
     virtual void pause(bool) = 0;
+
+    s32 _4;
+    s32 _8;
+    s32 _C;
+    s32 _10;
 };

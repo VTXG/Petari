@@ -38,6 +38,10 @@ AreaObj::AreaObj(int type, const char *pName) : NameObj(pName) {
     }
 }
 
+AreaObj::~AreaObj() {
+
+}
+
 // Issues with functors
 void AreaObj::init(const JMapInfoIter &rIter) {
     mForm->init(rIter);
@@ -101,11 +105,11 @@ bool AreaObj::isOnSwitchB() const {
 }
 
 bool AreaObj::isValidSwitchA() const {
-    return mSwitchCtrl->isOnSwitchA();
+    return mSwitchCtrl->isValidSwitchA();
 }
 
 bool AreaObj::isValidSwitchB() const {
-    return mSwitchCtrl->isOnSwitchB();
+    return mSwitchCtrl->isValidSwitchB();
 }
 
 void AreaObj::setFollowMtx(const TPos3f *pMtx) {
@@ -119,6 +123,10 @@ TPos3f* AreaObj::getFollowMtx() const {
 AreaObjMgr::AreaObjMgr(s32 count, const char* pName) : NameObj(pName), mArray() {
     mArray.mCount = 0;
     _18 = count;
+}
+
+AreaObjMgr::~AreaObjMgr() {
+    
 }
 
 void AreaObjMgr::entry(AreaObj *pAreaObj) {

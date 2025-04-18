@@ -44,6 +44,7 @@ namespace MR {
     bool isPlayingStageBgm();
     bool isPlayingStageBgmID(u32);
     bool isPlayingStageBgmName(const char *);
+    bool isPlayingSubBgmID(u32);
 
     void setStageBGMState(s32, u32);
 

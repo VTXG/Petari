@@ -13,7 +13,7 @@ public:
     void setFxSend(f32);
     void setCutoff(s32);
     void setSpecialFx(s32);
-    void initParams(s32);
+    void initParams();
 
     /* 0x00 */ s16* _0[4];
     /* 0x10 */ f32 _10;

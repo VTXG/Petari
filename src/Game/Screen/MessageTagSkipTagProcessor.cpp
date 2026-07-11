@@ -19,9 +19,43 @@ nw4r::ut::TagProcessorBase< wchar_t >::Operation MessageTagSkipTagProcessor::Pro
     }
 }
 
-/*
-nw4r::ut::TagProcessorBase<wchar_t>::Operation MessageTagSkipTagProcessor::skipTag(nw4r::ut::Rect *pRect, ContextType *pPrintContext, bool a3) {
-    pPrintContext->str += (*pPrintContext->str - 2) & 0xFFFFFFFE;
-    return (nw4r::ut::TagProcessorBase<wchar_t>::Operation)0;
+nw4r::ut::TagProcessorBase<wchar_t>::Operation MessageTagSkipTagProcessor::skipTag(nw4r::ut::Rect* pRect, ContextType* pPrintContext, bool a3) {
+    pPrintContext->str += (pPrintContext->getTagHeader()->size - 2u) >> 1;
+    return OPERATION_DEFAULT;
 }
-*/
+
+MessageEditorMessageTag::MessageEditorMessageTag(const nw4r::ut::PrintContext<wchar_t>* pPrintContext) : mMessage(pPrintContext->str) {
+
+}
+
+MessageEditorMessageTag::MessageEditorMessageTag(const wchar_t* pMessage) : mMessage(pMessage) {
+
+}
+
+u32 MessageEditorMessageTag::getTagLength() const {
+    return mTagHeader->size - 2u;
+}
+
+u32 MessageEditorMessageTag::getSkipLength() const {
+    return (mTagHeader->size - 2u) >> 1;
+}
+
+u32 MessageEditorMessageTag::getParamLength() const {
+    return mTagHeader->size - 6u;
+}
+
+u8 MessageEditorMessageTag::getParam8(int idx) const {
+    return *(reinterpret_cast<const u8*>(mMessage + 2u) + idx);
+}
+
+u16 MessageEditorMessageTag::getParam16(int idx) const {
+    return *(reinterpret_cast<const u16*>(mMessage + 2u) + idx);
+}
+
+u32 MessageEditorMessageTag::getParam32(int idx) const {
+    return *(reinterpret_cast<const u32*>(mMessage + 2u) + idx);
+}
+
+const wchar_t* MessageEditorMessageTag::getParamPtr(int idx) const {
+    return reinterpret_cast<const wchar_t *>((reinterpret_cast<const u8*>(mMessage + 2u) + idx));
+}

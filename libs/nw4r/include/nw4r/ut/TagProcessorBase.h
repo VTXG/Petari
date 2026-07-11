@@ -8,6 +8,11 @@ namespace nw4r {
         template <typename CharType>
         class TextWriterBase;
 
+        struct TagHeader {
+            /* 0x00 */ u8 size;
+            /* 0x01 */ u8 type;
+        };
+
         template<typename CharType>
         struct PrintContext {
             TextWriterBase<CharType>* writer;
@@ -15,6 +20,10 @@ namespace nw4r {
             const f32 xOrigin;
             const f32 yOrigin;
             u32 flags;
+
+            const inline TagHeader* getTagHeader() const {
+                return reinterpret_cast<const TagHeader*>(str);
+            }
         };
 
         template<typename CharT>

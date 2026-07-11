@@ -79,6 +79,59 @@ namespace {
     }
 };  // namespace
 
+CustomTagAlphaCtrl::CustomTagAlphaCtrl() : _0(), _4(), _8(), _1C(), _20() {
+    _C = 0;
+    _14 = 0;
+    _10 = 0;
+    _18 = false;
+}
+
+void CustomTagAlphaCtrl::init(u32 a1, f32 a2, f32 a3, s32 a4, s32 a5) {
+    if (a2 == 0.0f) {
+        _18 = false;
+        return;
+    }
+
+    _18 = true;
+    _8 = -a4;
+    _C = 0;
+    _1C = a3;
+    _20 = a2;
+    _14 = a1;
+    _10 = 0;
+    _0 = a4;
+    _4 = a5;
+}
+
+u8 CustomTagAlphaCtrl::alpha() const {
+    if (_18) {
+        f32 v = _20 * (_10 - _8) - _C * _1C;
+        f32 ret;
+
+        if (v <= 0.0f) {
+            ret = 0.0f;
+        }
+        else if (v >= 1.0f) {
+            ret = 1.0f;
+        }
+        else {
+            ret = v;
+        }
+
+        return ret * 255.0f;
+    }
+    
+    return 0xFF;
+}
+
+void CustomTagAlphaCtrl::update() {
+
+}
+
+bool CustomTagAlphaCtrl::isEnd() const {
+
+}
+
 CustomTagProcessor::CustomTagProcessor(nw4r::lyt::TextBox*) {
     
 }

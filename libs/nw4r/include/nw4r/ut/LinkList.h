@@ -2,7 +2,7 @@
 
 #include "nw4r/misc.h"
 #include "nw4r/ut/inlines.h"
-
+#include <Inline.hpp>
 namespace nw4r {
     namespace ut {
         class LinkListNode;
@@ -154,7 +154,7 @@ namespace nw4r {
                 explicit Iterator() {}
                 explicit Iterator(TIt_base_ it) : it_(it) {}
 
-                reference operator*() const {
+                reference operator*() const NO_INLINE {
                     pointer p = operator->();
                     return *p;
                 }

@@ -75,6 +75,10 @@ namespace nw4r {
 
             Pane* GetParent() const { return mpParent; }
 
+            PaneList* GetChildList() {
+                return &mChildList;
+            }
+
             void InsertChild(PaneList::Iterator, Pane*);
             void RemoveChild(Pane*);
             void AppendChild(Pane*);
